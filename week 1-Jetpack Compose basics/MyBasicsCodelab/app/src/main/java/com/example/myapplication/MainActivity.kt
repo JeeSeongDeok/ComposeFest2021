@@ -22,17 +22,22 @@ class MainActivity : ComponentActivity() {
          */
         setContent {
             MyApplicationTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
-                }
+                MyApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
+private fun MyApp() {
+    // A surface container using the 'background' color from the theme
+    Surface(color = MaterialTheme.colors.background) {
+        Greeting("Android")
+    }
+}
+
+@Composable
+private fun Greeting(name: String) {
     // Surface 및 MaterialTheme는 사용자 인터페이스를 만드는데 도움이 되도록
     // 구글에서 만든 디자인 시스템 Material Desing과 관련된 개념
     Surface(color = MaterialTheme.colors.primary){
@@ -47,6 +52,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        Greeting("Android")
+        MyApp()
     }
 }
