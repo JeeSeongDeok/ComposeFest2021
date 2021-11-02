@@ -3,6 +3,9 @@ package com.example.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -61,8 +64,16 @@ private fun Greetings(names: List<String> = List(1000) { "$it" } ) {
 private fun Greeting(name: String) {
     // Remeber는 재구성을 방지함
     val expended = remember { mutableStateOf(false) }
-    // 클릭 시 공간 확보를 위해서
-    val extraPadding = if (expended.value) 48.dp else 0.dp
+    // animateDpAsState는 Compose에서 제공하는 애니메이션 효과
+    val extraPadding by animateDpAsState(
+        // 클릭 시 공간 확보를 위해서
+        if (expended.value) 48.dp else 0.dp,
+        // animation을 커스터마이징 가능
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        )
+    )
 
     // Surface 및 MaterialTheme는 사용자 인터페이스를 만드는데 도움이 되도록
     // 구글에서 만든 디자인 시스템 Material Desing과 관련된 개념
@@ -76,7 +87,7 @@ private fun Greeting(name: String) {
             // Compose에는 alignEnd가 없으므로, weight로 가중치를 통해서 배치
             Column(modifier = Modifier
                 .weight(1f)
-                .padding(bottom = extraPadding)
+                .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 // TextView 대신 Composable func을 넣어 UI를 구성함
                 Text(text = "Hello,")
