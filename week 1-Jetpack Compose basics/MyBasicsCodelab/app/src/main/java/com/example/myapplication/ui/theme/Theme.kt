@@ -27,6 +27,7 @@ fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    // 다크모드 테마가 가능
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
