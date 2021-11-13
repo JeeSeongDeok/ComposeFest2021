@@ -49,6 +49,40 @@ class MainActivity : ComponentActivity() {
     }
 }
 @Composable
+fun TwoTexts(modifier: Modifier = Modifier, text1: String, text2: String) {
+    Row(modifier = modifier.height(IntrinsicSize.Min)) {
+        Text(
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 4.dp)
+                .wrapContentWidth(Alignment.Start),
+            text = text1
+        )
+
+        Divider(color = Color.Black, modifier = Modifier
+            .fillMaxHeight()
+            .width(1.dp))
+        Text(
+            modifier = Modifier
+                .weight(1f)
+                .padding(end = 4.dp)
+                .wrapContentWidth(Alignment.End),
+            text = text2
+        )
+    }
+}
+
+@Preview
+@Composable
+fun TwoTextsPreview() {
+    MyApplicationTheme {
+        Surface {
+            TwoTexts(text1 = "Hi", text2 = "there")
+        }
+    }
+}
+
+@Composable
 fun LargeConstraintLayout() {
     ConstraintLayout {
         val text = createRef()
@@ -178,13 +212,13 @@ fun Chip(modifier: Modifier = Modifier, text: String) {
     }
 }
 
-@Preview
-@Composable
-fun ChipPreview() {
-    MyApplicationTheme {
-        Chip(text = "Hi there")
-    }
-}
+//@Preview
+//@Composable
+//fun ChipPreview() {
+//    MyApplicationTheme {
+//        Chip(text = "Hi there")
+//    }
+//}
 @Composable
 fun StaggeredGrid(
     modifier: Modifier = Modifier,
@@ -365,13 +399,13 @@ fun BodyContent(modifier: Modifier = Modifier) {
         }
     }
 }
-@Preview
-@Composable
-fun ListPreview(){
-    MyApplicationTheme{
-        ScrollingList()
-    }
-}
+//@Preview
+//@Composable
+//fun ListPreview(){
+//    MyApplicationTheme{
+//        ScrollingList()
+//    }
+//}
 @Preview
 @Composable
 fun LayoutsCodelabPreview() {
@@ -380,13 +414,13 @@ fun LayoutsCodelabPreview() {
     }
 }
 
-@Preview()
-@Composable
-fun PhotographerCardPreview() {
-    MyApplicationTheme {
-        PhotographerCard()
-    }
-}
+//@Preview()
+//@Composable
+//fun PhotographerCardPreview() {
+//    MyApplicationTheme {
+//        PhotographerCard()
+//    }
+//}
 
 @Composable
 fun PhotographerCard(modifier: Modifier = Modifier) {
