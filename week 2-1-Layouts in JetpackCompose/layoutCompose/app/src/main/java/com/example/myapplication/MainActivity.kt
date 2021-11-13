@@ -26,6 +26,8 @@ import androidx.compose.ui.layout.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import coil.compose.rememberImagePainter
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import kotlinx.coroutines.launch
@@ -46,7 +48,77 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@Composable
+fun LargeConstraintLayout() {
+    ConstraintLayout {
+        val text = createRef()
 
+        val guideline = createGuidelineFromStart(0.5f)
+        Text(
+            "This is a very very very very very very very long text",
+            Modifier.constrainAs(text) {
+                linkTo(guideline, parent.end)
+                width = Dimension.preferredWrapContent
+            }
+        )
+    }
+}
+
+@Preview
+@Composable
+fun LargeConstraintLayoutPreview() {
+    MyApplicationTheme {
+        LargeConstraintLayout()
+    }
+}
+@Composable
+fun ConstraintLayoutContent() {
+    ConstraintLayout {
+
+        // createRefs()를 통해 참조할 수 있도록 함
+        val (button1, button2, text) = createRefs()
+
+        Button(
+            onClick = { /* Do something */ },
+            // 참조 가능한 버튼 할당
+            modifier = Modifier.constrainAs(button1) {
+                top.linkTo(parent.top, margin = 16.dp)
+            }
+        ) {
+            Text("Button")
+        }
+
+        // 텍스트 할당
+        Text("Text", Modifier.constrainAs(text) {
+            top.linkTo(button1.bottom, margin = 16.dp)
+        })
+
+        Text("Text", Modifier.constrainAs(text) {
+            top.linkTo(button1.bottom, margin = 16.dp)
+            // 가운데 정렬(ConstraintLayout)
+            centerHorizontallyTo(parent)
+        })
+
+        val barrier = createEndBarrier(button1, text)
+        Button(
+            onClick = { /* Do something */ },
+            modifier = Modifier.constrainAs(button2) {
+                top.linkTo(parent.top, margin = 16.dp)
+                start.linkTo(barrier)
+            }
+        ) {
+            Text("Button 2")
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ConstraintLayoutContentPreview() {
+    MyApplicationTheme {
+        ConstraintLayoutContent()
+    }
+}
 @Stable
 fun Modifier.padding(all: Dp) =
     this.then(
