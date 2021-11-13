@@ -18,6 +18,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.Layout
+
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +37,38 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@Composable
+fun MyOwnColumn(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Layout(
+        modifier = modifier,
+        content = content
+    ) { measurables, constraints ->
+        // 자식 뷰를 더 이상 제약하지 않고 주어진 제약 조건으로 측정합니다.
+        // children 목록
+        val placeables = measurables.map { measurable ->
+            // 측정된 칠드런
+            measurable.measure(constraints)
+        }
 
+        // 배치된 children의 y위치를 아릭 ㅜ이ㅐㅎ
+        var yPosition = 0
+
+        // 레이아웃의 크기를 최대한 크게 설정
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            // 부모 레이아웃에 자식 배치
+            placeables.forEach { placeable ->
+                // 화면에서 항목 위치 지정
+                placeable.placeRelative(x = 0, y = yPosition)
+
+                // y좌표 지정
+                yPosition += placeable.height
+            }
+        }
+    }
+}
 @Composable
 fun ScrollingList() {
     val listSize = 100
@@ -108,9 +141,11 @@ fun LayoutsCodelab() {
 }
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
-    Column(modifier = modifier.padding(8.dp)) {
-        Text(text = "Hi there!")
-        Text(text = "Thanks for going through the Layouts codelab")
+    MyOwnColumn(modifier = modifier.padding(8.dp)) {
+        Text("MyOwnColumn")
+        Text("places items")
+        Text("vertically.")
+        Text("We've done it by hand!")
     }
 }
 @Preview
