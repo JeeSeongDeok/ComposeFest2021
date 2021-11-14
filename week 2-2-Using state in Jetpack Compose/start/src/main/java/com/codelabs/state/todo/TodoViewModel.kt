@@ -21,14 +21,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class TodoViewModel : ViewModel() {
-
+    // state: TodoItem
     private var _todoItems = MutableLiveData(listOf<TodoItem>())
     val todoItems: LiveData<List<TodoItem>> = _todoItems
-
+    // event: 아이템 추가
     fun addItem(item: TodoItem) {
         _todoItems.value = _todoItems.value!! + listOf(item)
     }
-
+    // event: 아이템 제거
     fun removeItem(item: TodoItem) {
         _todoItems.value = _todoItems.value!!.toMutableList().also {
             it.remove(item)
