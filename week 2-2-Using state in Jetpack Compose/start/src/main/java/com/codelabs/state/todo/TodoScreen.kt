@@ -88,7 +88,9 @@ fun TodoScreen(
 fun TodoRow(
     todo: TodoItem,
     onItemClicked: (TodoItem) -> Unit,
-    modifier: Modifier = Modifier,
+        modifier: Modifier = Modifier,
+        // 호출자가 원하는 Tint값을 넣을 수도 있고, 랜덤 tint를 사용할 수도 있다.
+        // 재구성할 때 icon의 색을 기억하기 위해서 remember 사용
     iconAlpha: Float = remember(todo.id) { randomTint() }
 ) {
     Row(
