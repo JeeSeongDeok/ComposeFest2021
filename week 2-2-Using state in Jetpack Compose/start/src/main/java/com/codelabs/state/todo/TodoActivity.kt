@@ -43,11 +43,9 @@ class TodoActivity : AppCompatActivity() {
 }
 @Composable
 private fun TodoActivityScreen(todoViewModel: TodoViewModel) {
-    // TodoItems Live Data를 관찰하기 위해서 observeAsState를 사용
-    val items: List<TodoItem> by todoViewModel.todoItems.observeAsState(listOf())
     TodoScreen(
-        items = items,
-        onAddItem = { todoViewModel.addItem(it) },
-        onRemoveItem = { todoViewModel.removeItem(it) }
+        items = todoViewModel.todoItems,
+        onAddItem = todoViewModel::addItem,
+        onRemoveItem = todoViewModel::removeItem
     )
 }
