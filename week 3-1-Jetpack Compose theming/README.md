@@ -62,3 +62,25 @@ fun JetnewsTheme(
     )
 }
 ```
+
+## 5. Working with Color
+하드 코딩된 Color는 적용되지 않음<br>
+```kotlin
+Surface(color = Color.LightGray) {
+  Text(
+    text = "Hard coded colors don't respond to theme changes :("
+    textColor = Color(0xffff00ff)
+  )
+}
+```
+
+### Content Alpha
+중요한 것을 강조하고 싶을 때 사용<br>
+```kotlin
+CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+  Text(
+    text = text,
+    modifier = modifier
+  )
+}
+```
