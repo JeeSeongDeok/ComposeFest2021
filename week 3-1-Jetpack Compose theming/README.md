@@ -99,3 +99,15 @@ val text = buildAnnotatedString {
 }
 ```
 
+## 7. Working with Shapes
+테두리를 둥글게 혹은 다양한 방식으로 수정할 수 있음.<br>
+ex) Surface, Modifier.clip, Modifier.background, Modifier.border etc.
+```kotlin
+@Composable
+fun PostItem(...) {
+  ...
+  Image(
+    painter = painterResource(post.imageThumbId),
++   modifier = Modifier.clip(shape = MaterialTheme.shapes.small)
+  )
+```
