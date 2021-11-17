@@ -32,3 +32,33 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+## 4. Define your theme
+### Color
+색깔을 지정할 수 있는 theme<br>
+<p align="center"><img src="https://developer.android.com/codelabs/jetpack-compose-theming/img/16a0a3d57f49b71d.png?authuser=4"></p>
+
+### Typography
+텍스트를 스케일링 할 수 있음 <br>
+<p align="center"><img src = "https://developer.android.com/codelabs/jetpack-compose-theming/img/985064b5f0dbd8bd.png?authuser=4"></p>
+
+### Shape
+네모난 사각형에서 끝부분을 자르거나 둥글게 만드는 모양을 관리할 수 있음 <br>
+<p align="center"><img src = "https://developer.android.com/codelabs/jetpack-compose-theming/img/ebcdf2fb3364f0d3.png?authuser=4"></p>
+
+### Dark 모드
+Theme에 darkColor를 지정 후 사용자가 다크모드를 설정한 것을 확인한 후 지정한 색을
+```kotlin
+@Composable
+fun JetnewsTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colors = if (darkTheme) DarkColors else LightColors,
+        typography = JetnewsTypography,
+        shapes = JetnewsShapes,
+        content = content
+    )
+}
+```
