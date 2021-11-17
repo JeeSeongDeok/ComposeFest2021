@@ -111,3 +111,26 @@ fun PostItem(...) {
 +   modifier = Modifier.clip(shape = MaterialTheme.shapes.small)
   )
 ```
+
+## 8. Component "Styles"
+전체적인 스타일을 지정 후 Composable함수 안에서 나만의 텍스트 스타일을 지정할 수 있다.
+```kotlin
+@Composable
+fun LoginButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit
+) {
+    Button(
+        colors = ButtonConstants.defaultButtonColors(
+            backgroundColor = MaterialTheme.colors.secondary
+        ),
+        onClick = onClick,
+        modifier = modifier
+    ) {
+        ProvideTextStyle(...) { // set our own text style
+            content()
+        }
+    }
+}
+```
