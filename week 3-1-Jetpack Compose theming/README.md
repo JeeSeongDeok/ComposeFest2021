@@ -84,3 +84,18 @@ CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
   )
 }
 ```
+
+## 6. Working with Text
+Text에 여러 스타일을 추가하고 싶은 경우
+```kotlin
+val text = buildAnnotatedString {
+  append("This is some unstyled text\n")
+  withStyle(SpanStyle(color = Color.Red)) {
+    append("Red text\n")
+  }
+  withStyle(SpanStyle(fontSize = 24.sp)) {
+    append("Large text")
+  }
+}
+```
+
