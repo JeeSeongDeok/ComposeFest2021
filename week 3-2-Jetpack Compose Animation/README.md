@@ -130,3 +130,21 @@ val color by transition.animateColor(
 }
 ```
 <p align="center"><img src="https://developer.android.com/codelabs/jetpack-compose-animation/img/2ad4adbefce04ae2.gif?authuser=4"></p>
+
+## 7. Repeated animation
+유튜브 로딩때 화면 깜빡거리는 애니메이션 모션
+```kotlin
+val infiniteTransition = rememberInfiniteTransition()
+val alpha by infiniteTransition.animateFloat(
+    initialValue = 0f,
+    targetValue = 1f,
+    animationSpec = infiniteRepeatable(
+        animation = keyframes {
+            durationMillis = 1000
+            0.7f at 500
+        },
+        repeatMode = RepeatMode.Reverse
+    )
+)
+```
+<p align="center"><img src="https://developer.android.com/codelabs/jetpack-compose-animation/img/ca4d1d5bfe87b2a9.gif?authuser=4"></p>
