@@ -32,3 +32,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+## c
+```kotlin
+val backgroundColor by animateColorAsState(if (tabPage == TabPage.Home) Purple100 else Green300)
+```
+animateColorAsState로 색 변경시 애니메이션을 넣을 수 있다. <br>
