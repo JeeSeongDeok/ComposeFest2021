@@ -70,3 +70,17 @@ AnimatedVisibility(extended) {
     )
 ```
 <p align="center"><img src="https://developer.android.com/codelabs/jetpack-compose-animation/img/76895615b43b9263.gif?authuser=4"></p>
+
+## 5. Animating content size change
+Column에서 아이템 클릭 시 padding 적용
+```kotlin
+Column(
+    modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)
+        .animateContentSize()
+) {
+    // ... the title and the body
+}
+```
+<p align="center"><img src="https://developer.android.com/codelabs/jetpack-compose-animation/img/c0ad7381779fcb09.gif?authuser=4"></p>
